@@ -5,6 +5,7 @@ import * as React from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 import { NextUIProvider } from "@nextui-org/react";
+import CustomNaviation from '@/components/molecules/navbar'
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +20,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NextUIProvider>{children}</NextUIProvider>
+        <NextUIProvider>
+          <CustomNaviation/>
+          {children}
+          </NextUIProvider>
       </body>
     </html>
   );
