@@ -32,8 +32,8 @@ export default function App() {
         {menuItems.map((item, index) => (
           <NavbarItem key={index} isActive={pathname === item.path}>
             <Link
-              aria-current={pathname === item.path ?? 'page'}
-              color={pathname !== item.path ? "foreground":'primary'}
+              aria-current={pathname === item.path ?? "page"}
+              color={pathname !== item.path ? "foreground" : "primary"}
               href={item.path}
             >
               {item.name}
