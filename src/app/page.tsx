@@ -14,6 +14,7 @@ import {
 import { useEffect, useState } from "react";
 import CustomSearch from '@/components/molecules/search-input';
 import { pantryIngredients, specialRequirements, cookingStyle } from "@/constants/preferences";
+import CustomDatePicker from '@/components/molecules/date-picker';
 
 export default function Home() {
   const [search, setSearch] = useState('')
@@ -44,8 +45,23 @@ export default function Home() {
           />
         </div>
       </div>
-      <div>
-        <h2>Todays Menu</h2>
+      <h2 className="my-4">Todays Menu</h2>
+      <div className="grid grid-cols-2 w-full">
+        <div>
+          <CustomDatePicker />
+        </div>
+        <div>
+          <Card className="my-4">
+            <CardBody>
+              <p>Lunch: Baked Fish & Mashed Potatoes</p>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <p>Dinner: Ugali, Goat Meat, & Kachumbari</p>
+            </CardBody>
+          </Card>
+        </div>
       </div>
       <h1 className="my-4">Featured recipies</h1>
       <div className="max-w-[900px] gap-2 grid grid-cols-12 grid-rows-2 px-8">
