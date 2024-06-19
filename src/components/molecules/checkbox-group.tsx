@@ -6,13 +6,10 @@ import {
   Input,
 } from "@nextui-org/react";
 import CustomSearch from '@/components/molecules/search-input'
+import {OptionT} from '@/constants/types/components'
 
-type Option =  {
-    name: string;
-    id: string | number
-}
 
-export default function CustomCheckboxGroup({ options, label }: { options: Option[]; label: string }) {
+export default function CustomCheckboxGroup({ options, label }: { options: OptionT[]; label: string }) {
  const [search, setSearch] = useState("");
 
   const [filteredOptions, setfilteredOptions] = useState(options);

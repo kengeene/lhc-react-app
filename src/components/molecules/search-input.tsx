@@ -1,13 +1,8 @@
 import { Input } from "@nextui-org/react";
 import { SearchIcon } from "@/components/atoms/SearchIcon";
+import {SearchInputT} from '@/constants/types/components'
 
-export default function SearchInput({
-  value,
-  onChange,
-}: {
-  value: string;
-  onChange: (e: string) => void;
-}) {
+export default function SearchInput({ value, onChange, icon = true }: SearchInputT) {
   return (
     <Input
       value={value}
@@ -38,7 +33,11 @@ export default function SearchInput({
       }}
       placeholder="Type to search..."
       startContent={
-        <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+        icon ? (
+          <SearchIcon className="text-black/50 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
+        ) : (
+          ""
+        )
       }
     />
   );
