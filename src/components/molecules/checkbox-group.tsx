@@ -25,16 +25,21 @@ export default function CustomCheckboxGroup({ options, label }: { options: Optio
   }, [search, options]);
 
   return (
-    <CheckboxGroup label={label}>
+    <>
+      <label>{label}</label>
       <CustomSearch value={search} onChange={setSearch} />
-      {filteredOptions.map((option: any, index: any) => (
-        <Checkbox
-          key={option.id ? `${option.id}` : index}
-          value={option.id ? `${option.id}` : index}
-        >
-          {option.name ? option.name : option}
-        </Checkbox>
-      ))}
-    </CheckboxGroup>
+      <div className="max-h-48 overflow-y-auto mt-2">
+        <CheckboxGroup>
+          {filteredOptions.map((option: any, index: any) => (
+            <Checkbox
+              key={option.id ? `${option.id}` : index}
+              value={option.id ? `${option.id}` : index}
+            >
+              {option.name ? option.name : option}
+            </Checkbox>
+          ))}
+        </CheckboxGroup>
+      </div>
+    </>
   );
 }

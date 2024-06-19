@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { CheckboxGroup, Checkbox } from "@nextui-org/react";
 import { fetchRecipie } from "@/api/ai";
 import { Listbox, ListboxItem } from "@nextui-org/react";
+import CookingPreferences from "@/components/organisims/cooking-preferences";
 
 type Inputs = {
   ingredients: string;
@@ -48,55 +49,11 @@ export default function Page() {
     }
   };
 
-  const ingredients = [
-    "Tomatoes",
-    "Onions",
-    "Green Pepper",
-    "Rice",
-    "Potatoes",
-    "Galic",
-    "Ginger",
-  ];
-  const cookingStyle = [
-    "Oriental",
-    "Mediterranian",
-    "Western",
-    "African",
-    "South American",
-  ];
-  const dietType = ["No preferences", "Vegetetrian", "Keto", "Dairy Free"];
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="grid-cols-2">
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <CheckboxGroup label="Select Ingredients">
-            {ingredients.map((ingredient) => (
-              <Checkbox
-                value={ingredient}
-                key={ingredient}
-                {...register("ingredients")}
-              >
-                {ingredient}
-              </Checkbox>
-            ))}
-          </CheckboxGroup>
-          <CheckboxGroup label="Select Cooking Style">
-            {cookingStyle.map((style) => (
-              <Checkbox value={style} key={style} {...register("cookingStyle")}>
-                {style}
-              </Checkbox>
-            ))}
-          </CheckboxGroup>
-          <CheckboxGroup label="Select Dietary Preferences">
-            {dietType.map((diet) => (
-              <Checkbox value={diet} key={diet} {...register("diet")}>
-                {diet}
-              </Checkbox>
-            ))}
-          </CheckboxGroup>
-          <button type="submit">Submit</button>
-        </form>
+        <CookingPreferences/>
       </div>
       <div className="recipes">
         {possibleRecipes.map((recipe: Recipie, index) => (
