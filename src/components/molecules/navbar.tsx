@@ -13,13 +13,9 @@ import { usePathname } from "next/navigation";
 export default function App() {
   const pathname = usePathname();
 
-  useEffect(() => {
-    console.log("pathname", pathname);
-  }, [pathname]);
-
   const menuItems = [
     { name: "Home", path: "/" },
-    { name: "My Menu", path: "/" },
+    { name: "My Menu", path: "/my-menu" },
     { name: "Pantry", path: "/pantry" },
     { name: "Pricing", path: "/pricing" },
     { name: "Generate Recipie", path: "/generate-recipie" },
@@ -37,7 +33,7 @@ export default function App() {
           <NavbarItem key={index} isActive={pathname === item.path}>
             <Link
               aria-current={pathname === item.path ?? 'page'}
-              color="foreground"
+              color={pathname !== item.path ? "foreground":'primary'}
               href={item.path}
             >
               {item.name}
