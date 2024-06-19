@@ -1,4 +1,5 @@
-import React from "react";
+'use client'
+import React, { useEffect } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -7,8 +8,24 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
+import { usePathname } from "next/navigation";
 
 export default function App() {
+  const pathname = usePathname();
+
+  useEffect(() => {
+    console.log("pathname", pathname);
+  }, [pathname]);
+
+  const menuItems = [
+    { name: "Home", path: "/" },
+    { name: "My Menu", path: "/" },
+    { name: "Pantry", path: "/pantry" },
+    { name: "Pricing", path: "/pricing" },
+    { name: "Generate Recipie", path: "/generate-recipie" },
+  ];
+
+
   return (
     <Navbar position="static">
       <NavbarBrand>
@@ -16,31 +33,17 @@ export default function App() {
         <p className="font-bold text-inherit">ACME</p>
       </NavbarBrand>
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="/">
-            Home
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/my-menu">
-            My Menu
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="/pantry">
-            Pantry
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/pricing">
-            Pricing
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="/generate-recipie">
-            Generate Recipie
-          </Link>
-        </NavbarItem>
+        {menuItems.map((item, index) => (
+          <NavbarItem key={index} isActive={pathname === item.path}>
+            <Link
+              aria-current={pathname === item.path ?? 'page'}
+              color="foreground"
+              href={item.path}
+            >
+              {item.name}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
