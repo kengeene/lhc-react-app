@@ -7,6 +7,7 @@ import { CheckboxGroup, Checkbox } from "@nextui-org/react";
 import { fetchRecipie } from "@/api/ai";
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import CookingPreferences from "@/components/organisims/cooking-preferences";
+import CustomButton from "@/components/atoms/Button";
 
 type Inputs = {
   ingredients: string;
@@ -15,7 +16,7 @@ type Inputs = {
 };
 
 type Recipie = {
-  recipe_name: string;
+  recipeName: string;
   ingredients: [
     {
       name: string;
@@ -27,17 +28,27 @@ type Recipie = {
 };
 
 export default function Page() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
 
   const [possibleRecipes, setPossibleRecipes] = useState<Recipie[]>([]);
 
-  const onSubmit: SubmitHandler<Inputs> = async (data) => {
-    const payload: Inputs = data;
+  const [preferences, setPreferences] = useState({
+    pantryIngredients: [],
+    specialRequirements: [],
+    cookingStyle: [],
+  });
+
+  const [loading, setLoading] = useState(false)
+
+
+  useEffect(() => {
+    console.log("preferences", preferences);
+  }, [preferences]);
+
+  const onSubmit= async (data: any) => {
+    setLoading(true);
+    const payload = Object.entries(data)
+      .filter(([key, value]) => value.length !== 0)
+      .reduce((prev, [key, value]) => ({ ...prev, [key]: value }), {});
     try {
       const { data } = await fetchRecipie({ payload });
       const recipes = JSON.parse(data.choices[0].message.content);
@@ -46,6 +57,8 @@ export default function Page() {
       console.log("possibleRecipes", possibleRecipes);
     } catch (error) {
       console.log("error", error);
+    } finally{
+      setLoading(false);
     }
   };
 
@@ -53,12 +66,25 @@ export default function Page() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="grid-cols-2">
-        <CookingPreferences/>
+        <CookingPreferences
+          onChange={(data) => setPreferences({ ...preferences, ...data })}
+        />
       </div>
-      <div className="recipes">
+
+      <div className="grid-cols-1 w-full">
+        <CustomButton
+          className="w-full my-4"
+          onClick={() => onSubmit(preferences)}
+          loading={loading}
+        >
+          Submit
+        </CustomButton>
+      </div>
+
+      <div className="grid-cols-1">
         {possibleRecipes.map((recipe: Recipie, index) => (
           <div className="my-10" key={index}>
-            <h1 className="my-3">{recipe.recipe_name}</h1>
+            <h1 className="my-3">{recipe.recipeName}</h1>
             <h2>Ingredients</h2>
             <Listbox>
               {recipe.ingredients.map((ingredient, index) => (

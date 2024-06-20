@@ -9,3 +9,9 @@ export type OptionT = {
   name: string;
   id: string | number;
 };
+
+export type PreferencesT = {
+  pantryIngredients: OptionT[];
+  specialRequirements: OptionT[];
+  cookingStyle: OptionT[];
+};

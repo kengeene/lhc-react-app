@@ -9,8 +9,16 @@ import CustomSearch from '@/components/molecules/search-input'
 import {OptionT} from '@/constants/types/components'
 
 
-export default function CustomCheckboxGroup({ options, label }: { options: OptionT[]; label: string }) {
- const [search, setSearch] = useState("");
+export default function CustomCheckboxGroup({
+  options,
+  label,
+  onChange,
+}: {
+  options: OptionT[];
+  label: string;
+  onChange?: (data: any) => void;
+}) {
+  const [search, setSearch] = useState("");
 
   const [filteredOptions, setfilteredOptions] = useState(options);
 
@@ -29,11 +37,11 @@ export default function CustomCheckboxGroup({ options, label }: { options: Optio
       <label>{label}</label>
       <CustomSearch value={search} onChange={setSearch} />
       <div className="max-h-48 overflow-y-auto mt-2">
-        <CheckboxGroup>
+        <CheckboxGroup onChange={onChange}>
           {filteredOptions.map((option: any, index: any) => (
             <Checkbox
               key={option.id ? `${option.id}` : index}
-              value={option.id ? `${option.id}` : index}
+              value={option.name ? `${option.name}` : index}
             >
               {option.name ? option.name : option}
             </Checkbox>

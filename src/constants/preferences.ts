@@ -6,6 +6,10 @@ export const pantryIngredients = [
   { id: 5, name: "Garlic" },
   { id: 6, name: "Ginger" },
   { id: 7, name: "Potatoes" },
+  { id: 8, name: "Rice" },
+  { id: 9, name: "Spaghetti" },
+  { id: 10, name: "Cucumber" },
+  { id: 11, name: "Minced Meat" },
 ];
 
 export const specialRequirements = [
@@ -22,3 +26,5 @@ export const cookingStyle = [
   { id: 4, name: "African" },
   { id: 5, name: "South American" },
 ];
+
+

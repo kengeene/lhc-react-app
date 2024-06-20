@@ -3,14 +3,18 @@ import { Button } from "@nextui-org/react";
 
 export default function CustomButton({
   loading = false,
-  btnText,
+  // btnText,
   buttonType,
   className,
+  children,
+  onClick,
 }: {
   loading?: boolean;
   btnText: string;
   buttonType: string;
-  className: string
+  className: string;
+  children: string;
+  onClick: () => Promise<void>;
 }) {
   return (
     <Button
@@ -40,8 +44,9 @@ export default function CustomButton({
         </svg>
       }
       type="submit"
+      onClick={onClick}
     >
-      {btnText}
+      {children}
     </Button>
   );
 }
