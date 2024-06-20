@@ -8,12 +8,17 @@ export const pantryIngredients = [
   { id: 7, name: "Potatoes" },
 ];
 
-export const specialRequirements = ["Muslim", "Indian", "Jewish", "Vegeterian"];
+export const specialRequirements = [
+  { id: 1, name: "Muslim" },
+  { id: 2, name: "Indian" },
+  { id: 3, name: "Jewish" },
+  { id: 4, name: "Vegeterian" },
+];
 
 export const cookingStyle = [
-  "Oriental",
-  "Mediterranian",
-  "Western",
-  "African",
-  "South American",
+  { id: 1, name: "Oriental" },
+  { id: 2, name: "Mediterranian" },
+  { id: 3, name: "Western" },
+  { id: 4, name: "African" },
+  { id: 5, name: "South American" },
 ];
